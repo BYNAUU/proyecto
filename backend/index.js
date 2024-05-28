@@ -1,10 +1,15 @@
 const express = require('express') 
 const mongoose = require('mongoose') 
+const bodyParser = require('body-parser')
 const cors = require('cors')  // Importa el paquete cors
+const bcrypt = require('bcrypt')
 const Usuario = require('./models/usuarios') //Importo el modelo de la base de datos de usuarios
 const Receta = require('./models/recetas')//Importo el modelo de la base de datos de recetas
 
 const app = express() 
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //Middleware de CORS para el acceso del frontend con el backend
 app.use(cors()) 
@@ -37,6 +42,54 @@ app.get('/recipes/:nombre/:id', async (req, res) => {
     res.status(500).json({ mensaje: 'Error interno del servidor' }) 
   }
 }) 
+
+// entra en el login y el register y depende del action si es login o register hace una cosa u otra
+app.post('/identificarse',async(req,res)=>{
+  const { usuario,correo,contrasena,action }=req.body
+
+  if(action=== 'login'){
+    try{
+      const user=await Usuario.findOne({ usuario,correo })
+      if(user){
+        const isMatch=await bcrypt.compare(contrasena,user.contrasena)
+        if(isMatch){
+          res.json({ success:true,user })
+        }else{
+          res.json({ success:false,message:'Datos incorrectos' })
+        }
+      }else{
+        res.json({ success:false,message:'Usuario no encontrado' })
+      }
+    }catch(error){
+
+      res.status(500).json({ success:false,message: error })
+
+    }
+  }else if(action=== 'register'){
+    try{
+
+      const existingUser= await Usuario.findOne({ usuario })
+      const existingMail= await Usuario.findOne({ correo })
+
+      if(existingUser || existingMail ){
+
+        return res.json({ success:false,message:'Este usuario ya ha sido creado' })
+      }
+
+      const hashedPassword=await bcrypt.hash(contrasena,10)
+      const newUser=new Usuario({ usuario,correo,contrasena:hashedPassword })
+      await newUser.save()
+      res.json({ success:true,user:newUser })
+
+    }catch(error){
+
+      res.status(500).json({success:false,message:'Error en el server',error })
+    }
+  }else{
+
+    res.status(400).json({ success:false,message: error })
+  }
+})
 
 
 

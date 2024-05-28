@@ -42,6 +42,11 @@ const routes = [
     path: '/identificarse',
     name: 'indentify',
     component: () => import('../views/LogReg.vue')
+  },
+  {
+    path: '/error',
+    name: 'error',
+    component: () => import('../views/ErrorView.vue')
   }
 ]
 

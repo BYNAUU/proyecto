@@ -8,11 +8,10 @@
         </div>
         
         <section class="menu__img">
-            <div class="menu__img__conts" v-for="receta in recetas" :key="receta._id" >
-                <div class="menu__img__conts__cont" @click="verreceta(receta._id)">
-                    <p>{{receta.nombre}}</p>
+            <div class="menu__img__conts" v-for="(receta, index) in recetas" :key="receta._id">
+                <div :class="(index % 3 === 0) ? 'menu__img__conts__cont' : 'menu__img__conts__contt'" @click="verreceta(receta._id)">
+                <p>{{receta.nombre}}</p>
                 </div>
-                
             </div>
         </section>
     </section>
@@ -59,7 +58,6 @@ export default {
         padding: 0
     .menu
         width: 100%
-        height: 100vh
         display: flex
         align-items: center
         flex-direction: column
@@ -87,23 +85,44 @@ export default {
                 color: white
                 font-size: 50px
         &__img
-            width: 100%
-            height: 100%
-            display: grid 
-            grid-template-columns: repeat(2, 1fr) 
-            grid-template-rows: repeat(2, 1fr)
+            width: 70%
+            display: flex
+            flex-wrap: wrap
+            margin-inline: 100px
+            
             &__conts
                 border: 1px solid white
                 display: flex
-                justify-content: center
-                align-items: center 
+                flex-wrap: wrap
+                margin-inline: auto
+                display: flex
+                flex-wrap: wrap
+                justify-content: space-between
+                row-gap: 25px
+                margin: 20px auto
+                border-radius: 20px
                 &__cont
                     display: flex
                     justify-content: center
                     align-items: center 
                     cursor: pointer
+                    width: 1120px
+                    height: 400px
+                    border-radius: 20px
+                    
                     p
                         color: white
+                &__contt
+                    display: flex
+                    justify-content: center
+                    align-items: center 
+                    cursor: pointer
+                    width: 450px
+                    height: 450px
+                    border-radius: 20px
+                    p
+                        color: white
+
                   
 </style>
 
