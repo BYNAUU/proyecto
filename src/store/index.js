@@ -21,11 +21,11 @@ export default createStore({
         console.log(response.data)
 
         if (response.data.success) {
-
-          commit('LOGEARSE', response.data.user) 
+          commit('LOGEARSE', response.data.user)
           return true
         } else {
           console.error('Login fallado')
+          return false
         }
       } catch (error) {
         console.error(error)
@@ -34,22 +34,19 @@ export default createStore({
     },
     async register({ commit }, obj) {
       try {
-        const response = await axios.post('http://localhost:3000/identificarse',{...obj,action:'register'})
+        const response = await axios.post('http://localhost:3000/identificarse', { ...obj, action: 'register' })
         console.log(response.data)
 
-        if (response.data.success ){
-
-          commit('LOGEARSE', response.data.user) 
-          return true 
-
+        if (response.data.success) {
+          commit('LOGEARSE', response.data.user)
+          return true
         } else {
-
           console.error('Registro fallado')
-
+          return false
         }
       } catch (error) {
         console.error(error)
-        return false 
+        return false
       }
     }
   }

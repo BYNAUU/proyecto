@@ -1,108 +1,158 @@
 <template>
-  <section class="menu">
-    <section class="menu__cont">
-      <section class="menu__cont__izq">
-        <img id="logo" src="@/img/LogoSimple.png" alt="">
-        <img id="salchicha" src="@/img/salchicha.png" alt="">
-        <div class="menu__cont__izq__texto">
-          <p>El sabor de la perfección</p>
-          <div class="menu__cont__izq__texto__background">
-            <p>en cada bocado</p>
-          </div>
-        </div>
-      </section>
-      <section class="menu__cont__der">
-        <div class="menu__cont__der__contform">
-          <form v-if="!isRegistering" @submit.prevent="loginUser" method="post">
-            <h2>Login</h2>
-            <input type="text" v-model="usuario" placeholder="Usuario">
-            <input type="text" v-model="correo" placeholder="Correo">
-            <input type="password" v-model="contrasena" placeholder="Contraseña">
-            <div class="menu__cont__der__contform__olvidado">
-              <p>¿Has olvidado la contraseña?</p>
-            </div>
-            <button type="submit">Login</button>
-          </form>
-          <form v-else @submit.prevent="registerUser" method="post">
-            <h2>Register</h2>
-            <input type="text" v-model="usuario" placeholder="Usuario">
-            <input type="text" v-model="correo" placeholder="Correo">
-            <input type="password" v-model="contrasena" placeholder="Contraseña">
-            <div class="menu__cont__der__contform__olvidado">
-            </div>
-            <button type="submit">Crear cuenta</button>
-          </form>
-          <div class="menu__cont__der__contform__reg">
-            <p v-if="!isRegistering">¿Necesitas crear una cuenta? <strong @click="toggleForm">Registrate</strong></p>
-            <p v-else>¿Ya tienes una cuenta? <strong @click="toggleForm">Inicia sesión</strong></p>
-          </div>
-        </div>
-      </section>
+    <section class="menu">
+        <section class="menu__cont">
+            <section class="menu__cont__izq">
+                <img id="logo" src="@/img/LogoSimple.png" alt="">
+                <img id="salchicha" src="@/img/salchicha.png" alt="">
+                <div class="menu__cont__izq__texto">
+                    <p>El sabor de la perfección</p>
+                    <div class="menu__cont__izq__texto__background">
+                        <p>en cada bocado</p>
+                    </div>
+                </div>
+            </section>
+            <section class="menu__cont__der">
+                <div class="menu__cont__der__contform">
+                    <form v-if="!isRegistering && !esconder" @submit.prevent="loginUser" method="post">
+                        <h2>Login</h2>
+                        <input type="text" v-model="usuario" placeholder="Usuario">
+                        <input type="text" v-model="correo" placeholder="Correo">
+                        <input type="password" v-model="contrasena" placeholder="Contraseña">
+                        <div class="menu__cont__der__contform__olvidado">
+                            <p @click="toogleFormTwo">¿Has olvidado la contraseña?</p>
+                        </div>
+                        <button type="submit">Login</button>
+                    </form>
+
+
+                    <form v-else-if="isRegistering" @submit.prevent="registerUser" method="post">
+                        <h2>Register</h2>
+                        <input type="text" v-model="usuario" placeholder="Usuario">
+                        <input type="text" v-model="correo" placeholder="Correo">
+                        <input type="password" v-model="contrasena" placeholder="Contraseña">
+                        <button type="submit">Crear cuenta</button>
+                    </form>
+
+
+                    <form v-else @submit.prevent="pregcontra" method="post">
+                        <h2>Recuperar Contraseña</h2>
+                        <input type="email" v-model="correo" placeholder="Correo">
+                        <button type="submit">Enviar</button>
+                        <p @click="toogleFormTwo">Volver al login</p>
+                    </form>
+
+
+                    <div class="menu__cont__der__contform__reg" v-if="!esconder">
+                        <p v-if="!isRegistering">¿Necesitas crear una cuenta? <strong @click="toggleForm">Registrate</strong></p>
+                        <p v-else>¿Ya tienes una cuenta? <strong @click="toggleForm">Inicia sesión</strong></p>
+                    </div>
+                </div>
+            </section>
+        </section>
     </section>
-  </section>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import Cookies from 'js-cookie'
+import axios from 'axios'
 
 export default {
     data() {
         return {
-            usuario: '',
-            correo: '',
-            contrasena: '',
-            isRegistering: false
+            usuario: "",
+            correo: "",
+            contrasena: "",
+            isRegistering: false,
+            esconder: false
         }
     },
     computed: {
-        ...mapState(['user','contra','correo'])
+        ...mapState(['user', 'contra', 'correo'])
     },
     methods: {
         ...mapActions(['login', 'register']),
         async loginUser() {
-            try {
-                const success = await this.login({
+        try {
+            const success = await this.login({
                 usuario: this.usuario,
                 correo: this.correo,
                 contrasena: this.contrasena,
-                action: 'login'
+                action: "login"
+            })
+        if (success) {
+          if (Cookies.get("user")) {
+            // Si existe la elimina
+            Cookies.remove("user")
+          }
+          // Crear una nueva cookie con el nombre del usuario
+          Cookies.set("user", this.usuario, { expires: 7 }) //La cookie expira en 7 días
+          this.$router.push("/")
+        } else {
+          this.$router.push("/error")
+        }
+      } catch (error) {
+        console.error(error)
+        this.$router.push("/error")
+      }
+        },
+
+
+
+        async registerUser() {
+            try {
+                const success = await this.register({
+                usuario: this.usuario,
+                correo: this.correo,
+                contrasena: this.contrasena,
+                action: "register"
                 })
-                if (success){
+                if (success) {
+                    if (Cookies.get("user")) {
+                    Cookies.remove("user")
+                    }
+                    // Crear una nueva cookie con el nombre del usuario
+                    Cookies.set("user", this.usuario, { expires: 7 }) // La cookie expira en 7 días
+                    console.log("Usuario registrado:", this.user, this.correo, this.contra)
                     this.$router.push("/")
                 } else {
                     this.$router.push("/error")
-            }
-            } catch(error){
+                }
+            }catch (error) {
                 console.error(error)
                 this.$router.push("/error")
             }
         },
-        async registerUser(){
-        try {
-            const success = await this.register({
-            usuario: this.usuario,
-            correo: this.correo,
-            contrasena: this.contrasena,
-            action: 'register'
-            })
-            if (success) {
-            console.log('Usuario registrado:', this.user, this.correo, this.contra)
-            this.$router.push("/")
-            } else {
-            this.$router.push("/error")
+        async pregcontra() {
+            try {
+                const response = await axios.post("http://localhost:3000/identificarse", {correo: this.correo,action: "psswd"})
+                
+                if (response.data.success){
+                    console.log("revisa tu correo")
+                } else {
+                    console.log("ha habido un error")
+                }
+            } catch (error){
+                console.error(error)
+                
             }
-        } catch (error) {
-            console.error(error)
-            this.$router.push("/error")
-        }
         },
+
         toggleForm() {
             this.isRegistering = !this.isRegistering
+            this.esconder = false 
+        },
+
+        toogleFormTwo() {
+            this.esconder = !this.esconder
+            this.isRegistering = false 
         }
     }
 }
-
 </script>
+
+
+
 <style scoped lang="sass">
     *
         margin: 0

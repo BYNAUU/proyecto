@@ -1,7 +1,7 @@
 <template>
     <section class="menu">
         <div class="menu__categoria">
-            <a></a>
+            <a href="http://localhost:8080/add/" ><i class="fa-solid fa-plus"></i></a>
             <h1>{{ categoria }}</h1>
             <a href="http://localhost:8080/recipes/"><i class="fa-solid fa-arrow-left"></i></a>
             
@@ -10,7 +10,7 @@
         <section class="menu__img">
             <div class="menu__img__conts" v-for="(receta, index) in recetas" :key="receta._id">
                 <div :class="(index % 3 === 0) ? 'menu__img__conts__cont' : 'menu__img__conts__contt'" @click="verreceta(receta._id)">
-                <p>{{receta.nombre}}</p>
+                <img style="width:100%" :src="receta.foto" alt="">
                 </div>
             </div>
         </section>
@@ -38,6 +38,7 @@ export default {
         async obtenerRecetas() {
             try {
                 const respuesta = await axios.get(`http://localhost:3000/recipes/${this.categoria}`) 
+                console.log(respuesta.data)
                 this.recetas = respuesta.data 
                 console.log("aa")
             } catch (error) {
@@ -101,27 +102,39 @@ export default {
                 row-gap: 25px
                 margin: 20px auto
                 border-radius: 20px
+                overflow: hidden
+                border: 1px solid #111111
                 &__cont
                     display: flex
                     justify-content: center
                     align-items: center 
                     cursor: pointer
                     width: 1120px
-                    height: 400px
+                    height: 300px
                     border-radius: 20px
+                    
+                    
                     
                     p
                         color: white
+                    img
+                        width: 200%
+                        
+                        
                 &__contt
                     display: flex
                     justify-content: center
                     align-items: center 
                     cursor: pointer
                     width: 450px
-                    height: 450px
+                    height: 300px
                     border-radius: 20px
+                    
                     p
                         color: white
+                    img
+                        width: 200%
+                        height: 100%
 
                   
 </style>

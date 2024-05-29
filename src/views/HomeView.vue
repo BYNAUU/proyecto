@@ -58,6 +58,7 @@ export default {
     padding: 0
   .home
     width: 100%
+    overflow: hidden
     &__img
       width: 100%
       height: 100vh
@@ -69,6 +70,7 @@ export default {
       overflow: hidden
       &__img
         width: 100%
+        height: 100%
       
     &__info
       width: 100%

@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors()) 
 
 // me conecto con la base de datos
-mongoose.connect('mongodb://127.0.0.1:27017/tfg') 
+mongoose.connect('mongodb+srv://byNAU:befKc6leh5yLGKJ9@cluster0.w1vmvw2.mongodb.net/tfg?retryWrites=true&w=majority&appName=Cluster0') 
 
 
 
@@ -88,6 +88,44 @@ app.post('/identificarse',async(req,res)=>{
   }else{
 
     res.status(400).json({ success:false,message: error })
+  }
+})
+
+
+app.post('/add', async (req, res) => {
+  const { action, ...recetaData } = req.body
+
+  if (action == "create") {
+
+    try {
+
+      const nuevaReceta = new Receta(recetaData)
+      await nuevaReceta.save()
+      res.json({ success: true, message:"Receta creada exitosamente" })
+
+    } catch (error) {
+
+      console.error(error)
+      res.status(500).json({ success: false, message:"Error al crear la receta" })
+
+    }
+  } else if (action == "edit") {
+
+    try {
+
+      const { _id, ...updateData } = recetaData
+      await Receta.findByIdAndUpdate(_id, updateData, { new: true })
+      res.json({ success: true, message: "Receta editada exitosamente" })
+
+    } catch (error) {
+
+      console.error(error)
+      res.status(500).json({ success: false, message: "Error al editar la receta" })
+
+    }
+  } else {
+
+    res.status(400).json({ success: false, message: "Acción no válida" })
   }
 })
 

@@ -40,7 +40,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            recetas: {}, // Cambiado de receta a recetas
+            recetas: {}, 
             categoria: '',
             id:''
         } 
@@ -161,6 +161,10 @@ export default {
                     width: 50%
                     height: 100%
                     background: grey
+                    overflow: hidden
+                    display: flex
+                    justify-content: center
+                    align-items: center
                 
                 &__rigth
                     width: 44%

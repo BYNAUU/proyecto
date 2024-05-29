@@ -47,6 +47,11 @@ const routes = [
     path: '/error',
     name: 'error',
     component: () => import('../views/ErrorView.vue')
+  },
+  {
+    path: '/add',
+    name: 'add',
+    component: () => import('../views/NewRecipe.vue')
   }
 ]
 
@@ -54,5 +59,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
 
 export default router
