@@ -58,6 +58,7 @@ export default {
         flex-direction: column
         background: black
         height: 98.5vh
+        overflow-y: hidden
         
         
         &__header
@@ -80,18 +81,27 @@ export default {
                 align-items: center
                 width: 1900px
                 height: 1000px
+                @media (max-width: 430px)
+                    width: 100%
+                    height: 100%
             #cont2
                 display: flex
                 justify-content: center
                 align-items: center
                 width: 1900px
                 height: 1000px
+                @media (max-width: 430px)
+                    width: 100%
+                    height: 100%
             #cont3
                 display: flex
                 justify-content: center
                 align-items: center
                 width: 1900px
                 height: 1000px
+                @media (max-width: 430px)
+                    width: 100%
+                    height: 100%
             .menu__home__card
                 position: relative
                 overflow: hidden
@@ -104,6 +114,9 @@ export default {
                     animation: mew
                     animation-duration: 1s
                     animation-fill-mode: forwards
+                    @media (max-width: 430px)
+                        width: 100%
+                        height: 200px
                     
                 h1
                     font-family: "Playfair Display", serif
@@ -117,6 +130,8 @@ export default {
                     font-weight: 400
                     font-style: italic
                     letter-spacing: 2px
+                    @media (max-width: 430px)
+                        font-size: 30px
 
 @keyframes mew 
     0%

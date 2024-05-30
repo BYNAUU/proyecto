@@ -72,7 +72,7 @@ export default {
       align-items: center
       flex-direction: column
       
-    .recetas__info
+    &__info
       width: 100%
       height: 100vh
       display: grid
@@ -81,7 +81,10 @@ export default {
       
       grid-template-rows: 10%
       row-gap: 4px
-      
+      @media (max-width: 430px)
+        display: flex
+        flex-direction: column
+        gap: 10px
       .izq
         padding-right: 100px
       .der
@@ -90,6 +93,8 @@ export default {
       h2
         font-size: 100px
         cursor: pointer
+        @media (max-width: 430px)
+          font-size: 50px
       
 
 </style>

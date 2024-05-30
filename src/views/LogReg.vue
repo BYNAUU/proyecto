@@ -56,6 +56,7 @@
 import { mapState, mapActions } from 'vuex'
 import Cookies from 'js-cookie'
 import axios from 'axios'
+import {useToast} from "vue-toastification"
 
 export default {
     data() {
@@ -64,7 +65,8 @@ export default {
             correo: "",
             contrasena: "",
             isRegistering: false,
-            esconder: false
+            esconder: false,
+            toast:useToast()
         }
     },
     computed: {
@@ -73,29 +75,36 @@ export default {
     methods: {
         ...mapActions(['login', 'register']),
         async loginUser() {
-        try {
-            const success = await this.login({
-                usuario: this.usuario,
-                correo: this.correo,
-                contrasena: this.contrasena,
-                action: "login"
-            })
-        if (success) {
-          if (Cookies.get("user")) {
-            // Si existe la elimina
-            Cookies.remove("user")
-          }
-          // Crear una nueva cookie con el nombre del usuario
-          Cookies.set("user", this.usuario, { expires: 7 }) //La cookie expira en 7 días
-          this.$router.push("/")
-        } else {
-          this.$router.push("/error")
-        }
-      } catch (error) {
-        console.error(error)
-        this.$router.push("/error")
-      }
-        },
+            try {
+                const success = await this.login({
+                    usuario: this.usuario,
+                    correo: this.correo,
+                    contrasena: this.contrasena,
+                    action: "login"
+                })
+                if (success) {
+                if (Cookies.get("user")) {
+                    // Si existe la elimina
+                    Cookies.remove("user")
+                }
+                // Crear una nueva cookie con el nombre del usuario
+                Cookies.set("user", this.usuario, { expires: 7 }) //La cookie expira en 7 días
+                this.$router.push("/")
+                this.toast.success("Logeado Exitosamente", {
+                        position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
+                });
+                } else {
+                    this.toast.error("Datos mal introducidos", {
+                        position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
+                    });
+                }
+            } catch (error) {
+                console.error(error)
+                this.toast.error(error, {
+                        position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
+                    });
+            }
+                },
 
 
 
@@ -113,14 +122,20 @@ export default {
                     }
                     // Crear una nueva cookie con el nombre del usuario
                     Cookies.set("user", this.usuario, { expires: 7 }) // La cookie expira en 7 días
-                    console.log("Usuario registrado:", this.user, this.correo, this.contra)
                     this.$router.push("/")
+                    this.toast.success("Logeado Exitosamente", {
+                        position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
+                    });
                 } else {
-                    this.$router.push("/error")
+                    this.toast.error("Datos mal introducidos", {
+                        position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
+                    });
                 }
             }catch (error) {
                 console.error(error)
-                this.$router.push("/error")
+                this.toast.error(error, {
+                        position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
+                });
             }
         },
         async pregcontra() {
@@ -158,6 +173,7 @@ export default {
         margin: 0
         font-family: "Inter", sans-serif
         padding: 0
+    
     .menu
         width: 100%
         height: 100vh

@@ -27,6 +27,9 @@ export default {
     align-items: center
     height: 100px
     justify-content: space-between
+    @media (max-width: 430px)
+      display: none
+
     a
       z-index: 15
       text-decoration: none

@@ -2,7 +2,7 @@
     <section class="menu">
         <div class="menu__categoria">
             <a href="http://localhost:8080/add/" ><i class="fa-solid fa-plus"></i></a>
-            <h1>{{ categoria }}</h1>
+            <h2>{{ categoria }}</h2>
             <a href="http://localhost:8080/recipes/"><i class="fa-solid fa-arrow-left"></i></a>
             
         </div>
@@ -81,10 +81,12 @@ export default {
                     justify-content: center
                     align-items: center
                     cursor: pointer
-            h1
+            h2
                 margin: 30px 0
                 color: white
                 font-size: 50px
+                @media (max-width: 430px)
+                    font-size: 30px
         &__img
             width: 70%
             display: flex
@@ -112,6 +114,9 @@ export default {
                     width: 1120px
                     height: 300px
                     border-radius: 20px
+                    @media (max-width: 430px)
+                        width: 300px
+                        height: 222px
                     
                     
                     
@@ -119,6 +124,9 @@ export default {
                         color: white
                     img
                         width: 200%
+                        @media (max-width: 430px)
+                            width: 100%
+                            height: 100%
                         
                         
                 &__contt
@@ -129,6 +137,9 @@ export default {
                     width: 450px
                     height: 300px
                     border-radius: 20px
+                    @media (max-width: 430px)
+                        width: 300px
+                        height: 222px
                     
                     p
                         color: white

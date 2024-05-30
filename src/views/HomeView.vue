@@ -71,11 +71,16 @@ export default {
       &__img
         width: 100%
         height: 100%
+        @media (max-width: 430px)
+          width: 500%
+          
       
     &__info
       width: 100%
       height: 100vh
       background: #FF4C00
+      @media (max-width: 430px)
+        height: 120vh
       
       &__about
         width: 100%
@@ -95,12 +100,19 @@ export default {
           padding-top: 30px
           line-height: 170px
           font-style: normal
+          @media (max-width: 430px)
+            line-height: 70px
+            width: 90%
+
+          
           
           &__izq
             font-size: 180px
             font-weight: 200
             font-weight: 300
             font-style: normal
+            @media (max-width: 430px)
+              font-size: 60px
           &__der
             width: 100%
             display: flex
@@ -108,6 +120,9 @@ export default {
             font-size: 180px
             font-weight: 300
             font-style: normal
+            @media (max-width: 430px)
+              font-size: 50px
+              justify-content: flex-end
         &__paragraf
           margin-top: 30px
           width: 60%
@@ -117,6 +132,12 @@ export default {
           height: 50%
           justify-content: space-between
           padding-top: 50px
+          @media (max-width: 430px)
+            width: 90%
+            flex-direction: column
+            height: 60%
+            margin-top: 10px
+            
 
           &__izq
             width: 40%
@@ -125,7 +146,11 @@ export default {
             flex-direction: column
             justify-content: space-between
             color: white
+            @media (max-width: 430px)
+              width: 100%
             p
+              @media (max-width: 430px)
+                font-size: 18px
             
           
           &__der
@@ -133,6 +158,10 @@ export default {
             height: 100%
             display: flex
             justify-content: flex-end
+            @media (max-width: 430px)
+              width: 100%
+              justify-content: center
+              margin-top: 30px
             
             img
               width: 70%
