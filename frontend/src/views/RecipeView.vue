@@ -103,6 +103,8 @@ export default {
         justify-content: center
         align-items: center
         background:#E2AAA1
+        @media (max-width: 1430px)
+            height: 200vh
         &__info
             width: 90%
             height: 90%
@@ -122,6 +124,9 @@ export default {
                     padding: 20px 0
                     display: flex
                     align-items: center
+                    @media (max-width: 1430px)
+                        width: 100%
+                        font-size: 20px
                     
                 &__tipeoff
                     justify-content: space-between
@@ -134,11 +139,15 @@ export default {
                     font-size: 24px
                     border-left: 1px solid black
                     border-right: 1px solid black
+                    @media (max-width: 1430px)
+                        display: none
                     p
                         font-family: "Libre Baskerville", serif
                 &__back
                     margin: 30px 0
                     cursor: pointer
+                    @media (max-width: 1430px)
+                        display: none
                     a
                         text-decoration: none
                         color: black
@@ -157,6 +166,9 @@ export default {
                 height: 60vh
                 width: 100%
                 justify-content: space-between
+                @media (max-width: 1430px)
+                    flex-direction: column
+                    height: inherit
                 &__left
                     width: 50%
                     height: 100%
@@ -165,12 +177,18 @@ export default {
                     display: flex
                     justify-content: center
                     align-items: center
+                    @media (max-width: 1430px)
+                        width: 100%
+                        height: 30%
                 
                 &__rigth
                     width: 44%
                     display: flex
                     flex-direction: column
                     justify-content: space-between
+                    @media (max-width: 1430px)
+                        width: 100%
+                        height: 65%
                     &__desc
                         margin-bottom: 30px
                         font-size: 25px

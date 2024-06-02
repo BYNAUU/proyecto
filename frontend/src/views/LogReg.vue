@@ -141,6 +141,14 @@ export default {
                 })
             }
         },
+
+
+
+
+
+
+
+        
         async pregcontra() {
             try {
                 const response = await axios.post("http://localhost:3000/identificarse", {correo: this.correo,action: "psswd"})
