@@ -6,7 +6,7 @@ const recetaSchema = new mongoose.Schema({
   tipo: String,
   descripcion: String,
   pasos: [String],
-  favs: [String]
+  creado: String
 }) 
 
 module.exports = mongoose.model('Receta', recetaSchema, 'recetas') 

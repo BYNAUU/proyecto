@@ -2,8 +2,8 @@
   
     <section class="home__img__header">
       <i class="home__img__header__i"></i>
-      <img src="@/img/LogoSimple.png" alt="">
-      <a href="/menu"><i class="fa-solid fa-bars"></i></a>
+      <img src="@/img/LogoWhite.png" alt="">
+      <a href="/menu"><i style="color:white" class="fa-solid fa-bars"></i></a>
       
     </section>
       
@@ -40,7 +40,7 @@ export default {
         display: none
 
     img
-      height: 100px
+      width: 700px
       @media (max-width: 430px)
         width: 70%
         height: 100%

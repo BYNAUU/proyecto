@@ -14,10 +14,10 @@
       <section class="home__info__about">
         <section class="home__info__about__title">
           <div class="home__info__about__title__izq">
-            <p>Nex’t level</p>
+            <p>Next level</p>
           </div>
           <div class="home__info__about__title__der">
-            <p>in you kitchen</p>
+            <p>in your kitchen</p>
           </div>
           
         </section>
@@ -29,7 +29,7 @@
             </p>
           </div>
           <div class="home__info__about__paragraf__der">
-            <img src="@/img/yo.png" alt="">
+            <img src="@/img/yo.webp" alt="">
           </div>
         </section>
       </section>
@@ -125,7 +125,7 @@ export default {
               justify-content: flex-end
         &__paragraf
           margin-top: 30px
-          width: 60%
+          width: 50%
           font-size: 25px
           line-height: 1.5
           display: flex
@@ -140,7 +140,7 @@ export default {
             
 
           &__izq
-            width: 40%
+            width: 50%
             font-size: 20px
             display: flex
             flex-direction: column

@@ -64,8 +64,8 @@ export default {
                 console.log(this.recetas)
                 console.log("oleee")
             } catch (error) {
-                console.error('Error al obtener la receta:', error) 
-                console.log("a")
+                console.error(error) 
+                this.$router.push("/error")
             }
         },
         background(name){
@@ -73,12 +73,12 @@ export default {
             if (name == "carne"){
                 clas.style.background = "#c2b280"
             } if (name == "mariscos"){
-                clas.style.background = "#354B87"
+                clas.style.background = "#88a1e3"
             }if (name == "vegana"){
                 clas.style.background = "#8CBA51"
 
             }if(name == "pasta"){
-                clas.style.background = "#E2AAA1"
+                clas.style.background = "#ece2c6"
 
             }if(name == "arroces"){
                 clas.style.background = "#EAC751"

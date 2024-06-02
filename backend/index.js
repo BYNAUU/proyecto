@@ -91,43 +91,75 @@ app.post('/identificarse',async(req,res)=>{
   }
 })
 
-
-app.post('/add', async (req, res) => {
+//Crea o Modifica receta
+app.post('/receta', async (req, res) => {
   const { action, ...recetaData } = req.body
 
-  if (action == "create") {
-
+  if (action === "create") {
     try {
-
       const nuevaReceta = new Receta(recetaData)
       await nuevaReceta.save()
-      res.json({ success: true, message:"Receta creada exitosamente" })
-
+      res.json({ success: true, message: "Receta creada" })
     } catch (error) {
-
       console.error(error)
-      res.status(500).json({ success: false, message:"Error al crear la receta" })
-
+      res.status(500).json({ success: false, message:"Error al crear" })
     }
-  } else if (action == "edit") {
 
+
+
+  } else if (action === "edit") {
     try {
+      const { nombre, ...updateData } = recetaData
+      const recetaActualizada = await Receta.findOneAndUpdate({ nombre:nombre }, updateData, { new: true })
 
-      const { _id, ...updateData } = recetaData
-      await Receta.findByIdAndUpdate(_id, updateData, { new: true })
-      res.json({ success: true, message: "Receta editada exitosamente" })
 
+      if (!recetaActualizada) {
+        return res.status(404).json({ success: false, message: "Receta no encontrada" })
+
+
+      }
+      res.json({ success: true, message: "Receta editada exitosamente", receta: recetaActualizada })
+
+      
     } catch (error) {
-
       console.error(error)
-      res.status(500).json({ success: false, message: "Error al editar la receta" })
-
+      res.status(500).json({ success: false, message:"Error al editar la receta" })
     }
   } else {
-
-    res.status(400).json({ success: false, message: "Acción no válida" })
+    res.status(400).json({ success: false, message:"Acción no válida" })
   }
 })
+
+//Encuentra una receta donde el usuario se llame igual que el valor de la cookie
+app.get('/profile', async (req, res) => {
+  const cookie = req.query.cookie
+  try {
+    const recetas = await Receta.find({ creado: cookie })
+    res.json({ success: true, recetas })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ mensaje:'Error del server' })
+  }
+})
+
+//Elimina el usuario
+app.post('/delete', async (req, res) => {
+  const cookie = req.body.cookie
+  try {
+    const recetas = await Usuario.deleteOne({ usuario: cookie })
+    res.json({ success: true, recetas })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ mensaje:'Error del server' })
+  }
+})
+
+
+
+
+
+
+
 
 
 

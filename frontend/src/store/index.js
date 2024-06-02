@@ -29,6 +29,7 @@ export default createStore({
         }
       } catch (error) {
         console.error(error)
+        this.$router.push("/error")
         return false
       }
     },
@@ -46,6 +47,7 @@ export default createStore({
         }
       } catch (error) {
         console.error(error)
+        this.$router.push("/error")
         return false
       }
     }

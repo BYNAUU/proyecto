@@ -57,12 +57,15 @@ export default {
     *
         margin: 0
         padding: 0
+        
     .menu
         width: 100%
         display: flex
         align-items: center
         flex-direction: column
         background: #111111
+        scrollbar-color: #111111 #fff
+        scrollbar-width: thin
         &__categoria
             display: flex
             justify-content: space-between

@@ -7,17 +7,14 @@
             <section id="cont1" class="menu__home__card"> 
                 <img @click="GoHome()" src="@/img/home_img.png" alt="">
                 <h1>Home</h1>
-                <h1 style="margin-bottom:5px; margin-left:5px;color: black">Home</h1>
             </section>
             <section id="cont2" class="menu__home__card"> 
-                <img @click="GoRecipes()" src="@/img/home_img.png" alt="">
+                <img @click="GoRecipes()" src="@/img/recetas.webp" alt="">
                 <h1>Recetas</h1>
-                <h1 style="margin-bottom:5px; margin-left:5px;color: black">Recetas</h1>
             </section>
             <section id="cont3" class="menu__home__card">
-                <img @click="GoProfile()" src="@/img/home_img.png" alt="">
+                <img @click="GoProfile()" src="@/img/perfil.webp" alt="">
                 <h1>Perfil</h1>
-                <h1 style="margin-bottom:5px; margin-left:5px;color: black">Perfil</h1>
             </section>
         </section>
     </section>
@@ -39,6 +36,9 @@ export default {
     },
     GoRecipes(){
         this.$router.push("/recipes")
+    },
+    GoProfile(){
+        this.$router.push("/profile")
     }
   },
   
@@ -57,7 +57,7 @@ export default {
         display: flex
         flex-direction: column
         background: black
-        height: 98.5vh
+        height: 100vh
         overflow-y: hidden
         
         
@@ -126,7 +126,7 @@ export default {
                     left: 50%
                     transform: translate(-50%, -50%)
                     padding: 10px
-                    color: rgba(255,255,255,0.5)
+                    color: rgba(255,255,255,1)
                     font-weight: 400
                     font-style: italic
                     letter-spacing: 2px

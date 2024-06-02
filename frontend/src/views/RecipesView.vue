@@ -63,7 +63,7 @@ export default {
   .recetas
     width: 100%
     &__img
-      background-image: url('@/img/recetas.png') 
+      background-image: url('@/img/recetas.webp') 
       width: 100%
       height: 100vh
       background-repeat: no-repeat

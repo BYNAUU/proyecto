@@ -35,10 +35,13 @@
 
 
                     <form v-else @submit.prevent="pregcontra" method="post">
-                        <h2>Recuperar Contraseña</h2>
+                        <h2>Recuperar</h2>
                         <input type="email" v-model="correo" placeholder="Correo">
                         <button type="submit">Enviar</button>
-                        <p @click="toogleFormTwo">Volver al login</p>
+                        <div>
+                            <p id="volver" @click="toogleFormTwo">Volver al login</p>
+                        </div>
+                        
                     </form>
 
 
@@ -92,17 +95,17 @@ export default {
                 this.$router.push("/")
                 this.toast.success("Logeado Exitosamente", {
                         position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
-                });
+                })
                 } else {
                     this.toast.error("Datos mal introducidos", {
                         position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
-                    });
+                    })
                 }
             } catch (error) {
                 console.error(error)
                 this.toast.error(error, {
                         position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
-                    });
+                    })
             }
                 },
 
@@ -123,19 +126,19 @@ export default {
                     // Crear una nueva cookie con el nombre del usuario
                     Cookies.set("user", this.usuario, { expires: 7 }) // La cookie expira en 7 días
                     this.$router.push("/")
-                    this.toast.success("Logeado Exitosamente", {
+                    this.toast.success("Registrado Exitosamente", {
                         position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
-                    });
+                    })
                 } else {
                     this.toast.error("Datos mal introducidos", {
                         position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
-                    });
+                    })
                 }
             }catch (error) {
                 console.error(error)
                 this.toast.error(error, {
                         position: "top-right",timeout: 5000,closeOnClick: true,pauseOnFocusLoss: true,pauseOnHover: true,draggable: true,draggablePercent: 0.6,showCloseButtonOnHover: false,hideProgressBar: true,closeButton: "button",icon: true,rtl: false
-                });
+                })
             }
         },
         async pregcontra() {
@@ -149,6 +152,7 @@ export default {
                 }
             } catch (error){
                 console.error(error)
+                this.$router.push("/error")
                 
             }
         },
@@ -194,6 +198,8 @@ export default {
                 display: flex
                 flex-direction: column
                 justify-content: space-between
+                @media (max-width: 430px)
+                    display: none
                 #logo
                     width: 300px
                     margin-inline: auto
@@ -222,6 +228,8 @@ export default {
                 align-items: center
                 width: 40%
                 height: 100%
+                @media (max-width: 430px)
+                    width: 100%
                 &__contform
                     width: 80%
                     height: 80%
@@ -230,6 +238,13 @@ export default {
                     display: flex
                     align-items: center
                     flex-direction: column
+                    -webkit-box-shadow: 0 4px 10px -1px rgba(180, 171, 175, 0.5882352941), 0 2px 10px -2px rgba(180, 171, 175, 0.5882352941)
+                    @media (max-width: 430px)
+                        width: 100%
+                    #volver
+                        color: #683CFF
+                        margin-top: 30px
+                        cursor: pointer
                     h2
                         margin: 30px 0px
                         font-size: 50px
@@ -243,11 +258,12 @@ export default {
                         align-items: center
                         flex-direction: column
                     input
-                        width: 90%
+                        width: 87%
                         height: 45px
                         border: 2px solid black
                         border-radius: 10px
                         margin-bottom: 40px
+                        padding-left: 14px
                     button
                         width: 90%
                         height: 50px

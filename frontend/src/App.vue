@@ -26,7 +26,7 @@
     padding: 0
     scroll-behavior: smooth
     font-family: "Noto Serif", serif
-    scrollbar-color:  grey #fff
+    scrollbar-color: #fff #111111
     scrollbar-width: thin
     
 
