@@ -58,7 +58,6 @@ export default {
     padding: 0
   .home
     width: 100%
-    overflow: hidden
     &__img
       width: 100%
       height: 100vh
@@ -80,7 +79,7 @@ export default {
       height: 100vh
       background: #FF4C00
       @media (max-width: 430px)
-        height: 120vh
+        height: 145vh
       
       &__about
         width: 100%
@@ -112,7 +111,8 @@ export default {
             font-weight: 300
             font-style: normal
             @media (max-width: 430px)
-              font-size: 60px
+              font-size: 50px
+              font-weight: semi-bold
           &__der
             width: 100%
             display: flex
@@ -120,9 +120,11 @@ export default {
             font-size: 180px
             font-weight: 300
             font-style: normal
+            
             @media (max-width: 430px)
               font-size: 50px
               justify-content: flex-end
+              font-weight: semi-bold
         &__paragraf
           margin-top: 30px
           width: 50%
@@ -162,11 +164,14 @@ export default {
               width: 100%
               justify-content: center
               margin-top: 30px
+              overflow: hidden
             
             img
               width: 70%
               height: 90%
               background: grey
+              @media (max-width: 430px)
+                width: 100%
 
 
 </style>

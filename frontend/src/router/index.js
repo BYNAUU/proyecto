@@ -9,14 +9,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
     path: '/menu',
     name: 'menu',
-    component: () => import(/* webpackChunkName: "about" */ '../views/MenuView.vue')
+    component: () => import('../views/MenuView.vue')
   },
   {
     path: '/recipes',

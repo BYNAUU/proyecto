@@ -19,14 +19,15 @@
       
       <textarea v-model="nuevaReceta.descripcion" placeholder="Descripción de la receta"></textarea>
       <div class="principal__formcrear__pasos">
-        <div v-for="(paso, index) in nuevaReceta.pasos" :key="index">
+        <div  class="principal__formcrear__pasos__inputs" v-for="(paso, index) in nuevaReceta.pasos" :key="index">
           <input required type="text" v-model="nuevaReceta.pasos[index]" placeholder="Paso">
-          <i @click="deletePaso(index)" class="fa-solid fa-trash"></i>
+          <svg @click="deletePaso(index)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+          
         </div>
       </div>
-      <section style="width:40%" class="principal__header__contbotones">
-        <button style="background:white"  type="button" @click="agregarPaso">Añadir paso</button>
-        <button style="background:white" type="submit">Crear Receta</button>
+      <section  class="principal__formcrear__contbotoness">
+        <button   type="button" @click="agregarPaso">Añadir paso</button>
+        <button  type="submit">Crear Receta</button>
       </section>
       
     </form>
@@ -36,7 +37,7 @@
 
 
     <form class="principal__formcrear" v-if="mostrarFormulario === 'editar'" @submit.prevent="editarReceta">
-      <h3>Selecciona y edita la receta</h3>
+      <h3>Seleccione para editar</h3>
       <select v-model="recetaSeleccionada" @change="cargarReceta">
         <option v-for="receta in recetas" :key="receta._id" :value="receta">{{ receta.nombre }}</option>
       </select>
@@ -51,15 +52,15 @@
         <textarea v-model="recetaSeleccionada.descripcion" placeholder="Descripción de la receta"></textarea>
 
         <div class="principal__formcrear__pasos">
-          <div v-for="(paso, index) in recetaSeleccionada.pasos" :key="index">
+          <div class="principal__formcrear__pasos__inputs" v-for="(paso, index) in recetaSeleccionada.pasos" :key="index">
             <input required type="text" v-model="recetaSeleccionada.pasos[index]" placeholder="Paso">
-            <i @click="deletePasoEdicion(index)" class="fa-solid fa-trash"></i>
+            <svg @click="deletePasoEdicion(index)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
           </div>
         </div>
         
-        <section style="width:40%" class="principal__header__contbotones">
-          <button style="background:white" v-if="recetaSeleccionada.pasos.length < 7" type="button" @click="agregarPasoEdicion">Añadir paso</button>
-          <button style="background:white" type="submit">Guardar Cambios</button>
+        <section  class="principal__formcrear__contbotoness">
+          <button  v-if="recetaSeleccionada.pasos.length < 7" type="button" @click="agregarPasoEdicion">Añadir paso</button>
+          <button type="submit">Guardar Cambios</button>
         </section>
 
         </div>
@@ -137,6 +138,7 @@ export default {
     },
     async editarReceta() {
       try {
+        console.log(this.recetaSeleccionada)
         const response = await axios.post("http://localhost:3000/receta", {...this.recetaSeleccionada, action: "edit"})
 
         if (response.data.success) {
@@ -194,7 +196,7 @@ export default {
     flex-direction: column
     width: 100%
     height: 100vh
-    background: #111111
+    background: #8F81BE
     &__header
       height: 15%
       width: 100%
@@ -210,6 +212,10 @@ export default {
         width: 20%
         display: flex
         justify-content: space-between
+        @media (max-width: 430px)
+          width: 100%
+          justify-content: space-around
+        
         button
           width: 160px
           height: 40px
@@ -218,14 +224,23 @@ export default {
           border: none
           border-radius: 10px
           cursor: pointer
+          @media (max-width: 430px)
+            width: 40%
+          
     &__formcrear
       background: #f0f0f0
       width: 60%
-      height: 80%
+      height: 82%
       display: flex
       align-items: center
       flex-direction: column
       border-radius: 10px
+      @media (max-width: 430px)
+        width: 90%
+      select
+        width: 90%
+        height: 40px
+        margin-bottom: 30px
       .receta_seleccionada
         width: 100%
         height: 100%
@@ -240,33 +255,78 @@ export default {
         display: flex
         justify-content: space-between
         margin: 10px 0
+        @media (max-width: 930px)
+          width: 90%
+          display: flex
+          flex-direction: column
         input
-          border: 1px solid black
+          border: 2px solid black
           width: 300px
           height: 40px
           padding-left: 5px
           margin-bottom: 10px
           border-radius: 10px
+          @media (max-width: 930px)
+            width: 100%
+      
       textarea
         width: 88%
         padding: 10px
         height: 15%
-        border: 1px solid black
+        border: 2px solid black
         border-radius: 10px
+        resize: none
+        @media (max-width: 430px)
+          width: 89%
+          margin-left: 7px
+          padding-left: 5px
       &__pasos
         width: 90%
-        height: 35%
+        height: 45%
         margin: 20px 0
         overflow-y: scroll
         scrollbar-color:   black #f0f0f0
         scrollbar-width: thin
-        input
-          border: 1px solid black
-          width: 95%
+        &__inputs
+          display: flex
+          align-items: center
+
+          input
+            border: 2px solid black
+            width: 95%
+            height: 40px
+            padding-left: 5px
+            margin-bottom: 10px
+            border-radius: 10px
+          svg
+            width: 23px
+            height: 23px
+            margin-left: 10px
+            margin-bottom: 10px
+            cursor: pointer
+      &__contbotoness
+        width: 20%
+        display: flex
+        justify-content: space-between
+        justify-content: center
+        @media (max-width: 430px)
+          width: 100%
+          justify-content: space-around
+          margin-bottom: 20px
+        button
+          background: #8F81BE
+          width: 160px
           height: 40px
-          padding-left: 5px
-          margin-bottom: 10px
+          font-size: 16px
+          font-weight: bold
+          border: none
           border-radius: 10px
+          cursor: pointer
+          color: white
+          margin: 0 10px
+          @media (max-width: 430px)
+            width: 40%
+
 
 
 </style>

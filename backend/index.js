@@ -107,7 +107,7 @@ app.post('/receta', async (req, res) => {
 
 
 
-  } else if (action === "edit") {
+  } if (action === "edit") {
     try {
       const { nombre, ...updateData } = recetaData
       const recetaActualizada = await Receta.findOneAndUpdate({ nombre:nombre }, updateData, { new: true })

@@ -2,14 +2,13 @@
     <section class="menu">
         <section class="menu__cont">
             <section class="menu__cont__izq">
-                <img id="logo" src="@/img/LogoSimple.png" alt="">
-                <img id="salchicha" src="@/img/salchicha.png" alt="">
-                <div class="menu__cont__izq__texto">
-                    <p>El sabor de la perfección</p>
-                    <div class="menu__cont__izq__texto__background">
-                        <p>en cada bocado</p>
-                    </div>
-                </div>
+                <section class="menu__cont__izq__videoCont">
+                    <video autoplay loop muted playsinline width="1000px" >
+                        <source src="@/img/chefLogin.mp4" type="video/mp4">
+                    </video>
+                </section>
+                
+                
             </section>
             <section class="menu__cont__der">
                 <div class="menu__cont__der__contform">
@@ -189,8 +188,7 @@ export default {
     .menu
         width: 100%
         height: 100vh
-        background: rgb(188,103,255)
-        background: linear-gradient(270deg, rgba(188,103,255,1) 50%, rgba(193,178,244,1) 100%)
+        background: #8F81BE
         display: flex
         justify-content: center
         align-items: center
@@ -200,41 +198,35 @@ export default {
             display: flex
             justify-content: center
             align-items: center
+            justify-content: space-around
             &__izq
-                width: 60%
+                width: 50%
                 height: 80%
                 display: flex
                 flex-direction: column
                 justify-content: space-between
+                align-items: center
                 @media (max-width: 430px)
                     display: none
                 #logo
                     width: 300px
                     margin-inline: auto
-                #salchicha
-                    margin-inline: auto
-                    width: 400px
-                &__texto
+                &__videoCont
                     width: 100%
+                    height: 100%
                     display: flex
-                    justify-content: flex-end
+                    justify-content: center
                     align-items: center
-                    flex-direction: column
-                    height: 30%
-                    p
-                        font-size: 40px
-                        margin-bottom: 10px
-                    &__background
-                        background-image: url('@/img/fondo.png')
-                        width: 33%
-                        display: flex
-                        justify-content: center
-                        align-items: center
+                    overflow: hidden
+                    video
+                        width: 100%
+                        height: 100%
+                
             &__der
                 display: flex
                 justify-content: center
                 align-items: center
-                width: 40%
+                width: 50%
                 height: 100%
                 @media (max-width: 430px)
                     width: 100%
@@ -242,7 +234,6 @@ export default {
                     width: 80%
                     height: 80%
                     background: white
-                    border-radius: 20px
                     display: flex
                     align-items: center
                     flex-direction: column

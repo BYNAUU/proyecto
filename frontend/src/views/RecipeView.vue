@@ -172,7 +172,6 @@ export default {
                 &__left
                     width: 50%
                     height: 100%
-                    background: grey
                     overflow: hidden
                     display: flex
                     justify-content: center
@@ -193,6 +192,8 @@ export default {
                         margin-bottom: 30px
                         font-size: 25px
                         height: 25%
+                        @media (max-width: 430px)
+                            margin-bottom: 140px
                     &__cont
                         height: 65%
                         &__pasos

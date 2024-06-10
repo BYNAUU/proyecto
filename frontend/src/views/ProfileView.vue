@@ -12,12 +12,12 @@
                         
                     </section>
                     <section class="profile__info__cont__first__der">
-                        <i @click.prevent="deleteAccount()" class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <svg @click.prevent="deleteAccount()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
                     </section>
                     
                 </section>
                 <section class="profile__info__cont__texto">
-                    <h1>Este es tu listado de recetas creadas por ti!</h1>
+                    <h1>Tus recetas</h1>
                 </section>
                 <section class="profile__info__cont__galeria">
                     <section v-if="recetas.length > 0" class="profile__info__cont__galeria__scroll">
@@ -79,13 +79,7 @@ export default {
         },
         async deleteAccount() {
             try {
-                const user = Cookies.get("user")
-                await axios.post(`http://localhost:3000/delete`, {
-                    cookie: user
-                })
-                console.log("nombreee", user)
-                Cookies.remove("user")
-                this.$router.push("/")
+                console.log("a")
             } catch (error) {
                 this.$router.push("/error")
             }
@@ -102,7 +96,7 @@ export default {
         font-family: roboto
     .profile
         width: 100%
-        background: rgb(11,14,15)
+        background: #8F81BE
         @media (max-width: 430px)
             overflow: hidden                  
         &__img
@@ -117,57 +111,60 @@ export default {
             display: flex
             justify-content: center
             align-items: center
-            background: #191b1f
+            background: #8F81BE
             &__cont 
                 width: 100%
                 height: 100%
-                background: #191b1f
+                background: #8F81BE
                 &__first
                     width: 100%
-                    height: 50% 
+                    height: 40% 
                     display: flex
+                    justify-content: center
                     
                     &__izq
-                        width: 50%
+                        width: 45%
                         height: 100%
-                        padding-top: 35px
+                        padding-top: 65px
                         h3
                             font-size: 50px
                             color: white
-                            padding-left: 30px
-                            font-family: Noto Serif
                         h4
                             font-size: 25px
                             margin-top: 40px
                             color: white
-                            padding-left: 30px
                         p
                             color: white
-                            padding-left: 30px
 
                         
                             
                     &__der
-                        width: 50%
+                        width: 45%
                         height: 100%
-                        padding-top: 35px
+                        padding-top: 65px
                         display: flex
                         justify-content: flex-end
-                        i
+                        svg
                             color: white
-                            font-size: 30px
-                            margin-right: 30px
+                            width: 30px
+                            cursor: pointer
+                            height: 30px
                             cursor: pointer
                 &__texto 
-                    h1
-                        color: white
-                        margin-left: 30px
-                        font-size: 30px      
-                &__galeria
                     width: 100%
+                    display: flex
+                    justify-content: flex-end
+                    h1
+                        width: 95%
+                        color: white
+                        font-size: 30px  
+                &__galeria
+                    width: 95%
+                    height: auto
+                    margin-left: auto
                     height: 50%
                     display: flex
-                    background: #191b1f
+                    background: #8F81BE
                     
                     &__scroll
                         display: flex
@@ -175,11 +172,11 @@ export default {
                         justify-content: space-between
                         overflow-y: hidden
                         overflow-x: scroll
-                        scrollbar-color:   #fff #191b1f
+                        scrollbar-color:   #fff #8F81BE
                         scrollbar-width: thin
                         display: flex
                         align-items: center
-                        background: #191b1f
+                        background: #8F81BE
                         h1
                             color: white
                             font-size: 30px
@@ -194,7 +191,6 @@ export default {
                             display: flex
                             align-items: center
                             justify-content: center
-                            margin-left: 30px
                             @media (max-width: 430px)
                                 width: 400px
                                 height: 300px
