@@ -54,7 +54,19 @@ const routes = [
     name: 'error',
     component: () => import('../views/ErrorView.vue')
     
-  }
+  },
+  {
+    path: '/reset/:token',
+    name: 'ResetPassword',
+    component: () => import('../views/ResetView.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'error',
+    component: () => import('../views/ErrorView.vue')
+    
+  },
+
 ]
 
 const router = createRouter({

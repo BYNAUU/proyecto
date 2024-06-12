@@ -23,8 +23,7 @@
                 <p class="menu__info__down__rigth__desc">{{ recetas.descripcion }}</p>
                 
                 <div class="menu__info__down__rigth__cont" v-for="(paso,index) in recetas.pasos" :key="paso">
-                    
-                    <p class="menu__info__down__rigth__cont__pasos"><strong>{{index}}. </strong>{{ paso }}</p>
+                    <p class="menu__info__down__rigth__cont__pasos"><strong>{{index+1}}. </strong>{{ paso }}</p>
                 </div>
             </div>
         </div>
@@ -103,7 +102,7 @@ export default {
         justify-content: center
         align-items: center
         background:#E2AAA1
-        @media (max-width: 1430px)
+        @media (max-width: 430px)
             height: 200vh
         &__info
             width: 90%
@@ -124,9 +123,11 @@ export default {
                     padding: 20px 0
                     display: flex
                     align-items: center
-                    @media (max-width: 1430px)
+                    @media (max-width: 430px)
                         width: 100%
                         font-size: 20px
+                    @media (min-width: 1300px)
+                        width: 60%
                     
                 &__tipeoff
                     justify-content: space-between
@@ -139,14 +140,14 @@ export default {
                     font-size: 24px
                     border-left: 1px solid black
                     border-right: 1px solid black
-                    @media (max-width: 1430px)
+                    @media (max-width: 430px)
                         display: none
                     p
                         font-family: "Libre Baskerville", serif
                 &__back
                     margin: 30px 0
                     cursor: pointer
-                    @media (max-width: 1430px)
+                    @media (max-width: 430px)
                         display: none
                     a
                         text-decoration: none
@@ -166,7 +167,7 @@ export default {
                 height: 60vh
                 width: 100%
                 justify-content: space-between
-                @media (max-width: 1430px)
+                @media (max-width: 430px)
                     flex-direction: column
                     height: inherit
                 &__left
@@ -176,35 +177,48 @@ export default {
                     display: flex
                     justify-content: center
                     align-items: center
-                    @media (max-width: 1430px)
+                    @media (max-width: 430px)
                         width: 100%
                         height: 30%
+                    @media (min-width: 1300px)
+                        width: 40%
                 
                 &__rigth
                     width: 44%
                     display: flex
                     flex-direction: column
                     justify-content: space-between
-                    @media (max-width: 1430px)
+                    @media (max-width: 430px)
                         width: 100%
                         height: 65%
+                    @media (min-width: 1300px)
+                        width: 54%
                     &__desc
                         margin-bottom: 30px
                         font-size: 25px
                         height: 25%
                         @media (max-width: 430px)
                             margin-bottom: 140px
+                        @media (min-width: 1300px)
+                            font-size: 19px
+                            margin-bottom: 10px
                     &__cont
                         height: 65%
                         &__pasos
                             font-family: "Roboto"
                             padding-bottom: 5px
                             font-size: 19px
+                            @media (min-width: 1300px)
+                                font-size: 18px
+                                padding-bottom: 2px
                             strong
                                 font-size: 25px
                                 font-family: "Libre Baskerville", serif
                                 padding-bottom: -5px
                                 font-weight: 600
+                            @media (min-width: 1300px)
+                                font-size: 20px
+                                padding-bottom: 2px
 
     
 </style>

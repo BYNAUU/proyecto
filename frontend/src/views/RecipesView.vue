@@ -85,6 +85,10 @@ export default {
         display: flex
         flex-direction: column
         gap: 10px
+      @media (min-width: 1300px)
+          justify-content: center
+          align-items: center
+          padding-top: 20px
       .izq
         padding-right: 100px
       .der
@@ -95,6 +99,9 @@ export default {
         cursor: pointer
         @media (max-width: 430px)
           font-size: 50px
+        @media (min-width: 1300px)
+          font-size: 80px
+          padding-top: 10px
       
 
 </style>

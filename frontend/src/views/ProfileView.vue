@@ -68,9 +68,7 @@ export default {
                 console.log(respuesta.data)
 
                 this.recetas = respuesta.data.recetas
-                console.log(this.recetas)
                 this.usrr = respuesta.data.usuario
-                console.log("usurioooooo",this.usrr)
 
             } catch (error) {
                 console.error('Error al obtener las recetas:', error)
@@ -79,9 +77,14 @@ export default {
         },
         async deleteAccount() {
             try {
-                console.log("a")
+                const respuesta = await axios.post(`http://localhost:3000/delete`, {
+                    cookie: Cookies.get("user")
+                })
+                Cookies.remove("user")
+                console.log(respuesta)
+                this.$router.push("/")
             } catch (error) {
-                this.$router.push("/error")
+                console.error('Error al eliminar la cuenta:', error)
             }
         }
     }

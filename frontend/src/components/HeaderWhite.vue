@@ -29,7 +29,8 @@ export default {
     justify-content: space-between
     @media (max-width: 430px)
       display: none
-
+    @media (min-width: 1300px)
+      width: 1250px
     a
       z-index: 15
       text-decoration: none

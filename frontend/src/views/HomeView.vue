@@ -79,7 +79,9 @@ export default {
       height: 100vh
       background: #FF4C00
       @media (max-width: 430px)
-        height: 145vh
+        height: 160vh
+      @media (min-width: 1300px)
+        height: 100vh
       
       &__about
         width: 100%
@@ -113,6 +115,9 @@ export default {
             @media (max-width: 430px)
               font-size: 50px
               font-weight: semi-bold
+            @media (min-width: 1300px)
+              font-size: 140px
+              
           &__der
             width: 100%
             display: flex
@@ -125,6 +130,8 @@ export default {
               font-size: 50px
               justify-content: flex-end
               font-weight: semi-bold
+            @media (min-width: 1300px)
+              font-size: 140px
         &__paragraf
           margin-top: 30px
           width: 50%
@@ -139,6 +146,10 @@ export default {
             flex-direction: column
             height: 60%
             margin-top: 10px
+          @media (min-width: 1300px)
+            width: 70%
+            height: 45vh
+            padding: 0px
             
 
           &__izq
@@ -150,6 +161,11 @@ export default {
             color: white
             @media (max-width: 430px)
               width: 100%
+            @media (min-width: 1300px)
+              height: 100%
+              width: 50%
+              font-size: 18px
+              
             p
               @media (max-width: 430px)
                 font-size: 18px
@@ -165,6 +181,13 @@ export default {
               justify-content: center
               margin-top: 30px
               overflow: hidden
+            @media (min-width: 1300px)
+              height: 100%
+              width: 40%
+              overflow: hidden
+              display: flex
+              justify-content: flex-end
+              align-items: center
             
             img
               width: 70%
@@ -172,6 +195,9 @@ export default {
               background: grey
               @media (max-width: 430px)
                 width: 100%
+              @media (min-width: 1300px)
+                width: 80%
+                height: 700px
 
 
 </style>
